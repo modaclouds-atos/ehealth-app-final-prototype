@@ -1,6 +1,6 @@
 # ehealth-app-final-prototype
 
-![alt tag](https://github.com/modaclouds-atos/ehealth-app-final-prototype/tree/master/readme/modaclouds.png?raw=true)
+![alt tag](https://github.com/modaclouds-atos/ehealth-app-final-prototype/blob/master/readme/modaclouds.png?raw=true)
 
 | Softcare component  | Brief description  |
 | :------------: |:---------------|
