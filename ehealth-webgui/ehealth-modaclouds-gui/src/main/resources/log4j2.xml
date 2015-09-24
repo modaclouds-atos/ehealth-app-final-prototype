@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+
+	Standard Level	intLevel
+	OFF				0
+	FATAL			100
+	ERROR			200
+	WARN			300
+	INFO			400
+	DEBUG			500
+	TRACE			600
+
+-->
+<Configuration status="WARN">
+	<!-- 
+		Define custom levels before using them for filtering below. 
+		Then, in code:
+			final Level DIAG = Level.forName("DIAG", 350);
+			log.log(DIAG, "a DIAG message"); 				// use the custom DIAG level
+	
+  	<CustomLevels>
+    	<CustomLevel name="DIAG" intLevel="510" />
+    	<CustomLevel name="NOTICE" intLevel="450" />
+    	<CustomLevel name="VERBOSE" intLevel="550" />
+  	</CustomLevels>
+  	-->
+	<!-- 
+		- Log4j2 will look for a 'log4j2.xml' files (also .json or .yaml files)
+		- properties description: 'log-path' value can be used later as ${log-path} (for example in paths) 
+		- Use './' to refer to application root path 
+	-->
+	<Properties>
+		<Property name="log-path">C:/logs/</Property> 
+	</Properties>
+	<Appenders>
+		<RollingFile name="RollingFile" fileName="./logs.log" filePattern="./logs-%d{yyyy-MM-dd}-%i.log">
+			<PatternLayout>
+				<!--  
+					expres:	[%d{dd/MMM/yyyy HH:mm:ss,SSS}] [%c{1}] -%p- %m%n
+					result:	[30/abr/2015 11:44:56,873] [Example] -DIAG- a DIAG message
+				-->
+				<pattern>%d{dd/MMM/yyyy HH:mm:ss,SSS}- %c{1}: %m%n</pattern>
+			</PatternLayout>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="512 KB" />
+			</Policies>
+			<DefaultRolloverStrategy max="4" />
+		</RollingFile>
+		<!-- 
+			info: you can define other appenders that use the same console, with other format
+			and level: 'AppenderRef ref="STDOUT2" level="ERROR"'
+		-->
+    	<Console name="STDOUT" target="SYSTEM_OUT">
+      		<PatternLayout>
+				<pattern>[%d{HH:mm:ss,SSS}] [%c{1}] [%p] %m%n</pattern>
+			</PatternLayout>
+    	</Console>
+	</Appenders>
+	<Loggers>
+		<Logger name="root" level="debug" additivity="false">
+			<appender-ref ref="RollingFile" level="debug" />
+			<appender-ref ref="STDOUT" level="debug" />
+		</Logger>
+		<Root level="debug" additivity="false">
+			<!--  
+				Set levels in AppenderRef elements
+			-->
+			<AppenderRef ref="RollingFile" level="warn" />
+			<AppenderRef ref="STDOUT" level="debug" />
+		</Root>
+	</Loggers>
+</Configuration>

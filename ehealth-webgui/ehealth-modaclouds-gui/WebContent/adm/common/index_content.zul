@@ -1,0 +1,133 @@
+<zk>
+	<zscript>
+		import org.zkoss.util.resource.Labels;
+		
+		
+		String title = Labels.getLabel("home.title");
+		page.setTitle(title);
+		String newprof = Labels.getLabel("home.newprofile");
+		Boolean isadmin = (Boolean)Sessions.getCurrent().getAttribute("isadmin");
+	</zscript>
+	
+	<style dynamic="true">
+		.gridnolayout tr.z-row td.z-row-inner, tr.z-row .z-cell,div.z-grid{
+			border: none;
+			overflow:hidden;
+			zoom: 1;
+			background: white; 
+			border-top: none;
+			border-left: none;
+			border-right: none;
+			border-bottom: none; 
+		}
+	</style>
+	
+	<separator spacing="50px" />
+	<window width="900px" sclass="centerwin" border="none">
+		<grid sclass="gridnolayout" >
+			<columns>
+				<column width="25%" align="center"/>
+				<column width="25%" align="center"/>
+				<column width="25%" align="center"/>
+				<column width="25%" align="center"/>
+			</columns>
+			<rows>
+				<row height="150px">
+					<button onClick="selectMenuOption(patients);" height="90%" width="90%" 
+						image="../inc/icons/patient-icon2.png" tooltiptext="View patients"/>
+					<button onClick="selectMenuOption(carers);" height="90%" width="90%" 
+						image="../inc/icons/carer.png" tooltiptext="Go to caregivers"/>
+					<button onClick="selectMenuOption(clinicians);" height="90%" width="90%" 
+						image="../inc/icons/clinician.png" tooltiptext="View clinicians"/>
+					<button  onClick="selectMenuOption(warnings_link);" height="90%" width="90%" 
+						image="../inc/icons/warning.png" if="${!isadmin }" tooltiptext="View Patients warnings"/>
+					<button  onClick="selectMenuOption(administration);" height="90%" width="90%" 
+						image="../inc/icons/Admin-icon.png" tooltiptext="Administration" if="${isadmin }"/>
+				</row>
+				
+				<row height="150px">
+					<button onClick="selectMenuOption(services_link);" height="90%" width="90%" 
+						image="../inc/icons/services.png" tooltiptext="Management of external services"/>
+					<button onClick="selectMenuOption(qm);" height="90%" width="90%" 
+						image="../inc/icons/qm.png" tooltiptext="Go to the Questionnaire manager" disabled="true"/>
+					<button  onClick="selectMenuOption(cm);" height="90%" width="90%" 
+						image="../inc/icons/content_management.png" tooltiptext="Content management"/>
+					<button onClick="selectMenuOption(calendar);" height="90%" width="90%" 
+						image="../inc/icons/calendar.png" tooltiptext="View Calendar" if="${!isadmin }" />
+					<button height="90%" width="90%" 
+						image="../inc/icons/services.png" tooltiptext="Multimedia Content" if="${isadmin }" disabled="true"/>
+				</row>
+			</rows>
+		</grid>
+	</window>
+	
+	
+	
+	<zscript>
+		public void selectMenuOption(String opt)
+		{
+			Label lab1 = (Label) migas.getFellow("migas1");
+			lab1.value = "";
+		
+			// patients:  /patients/index.zul
+			if (opt.equalsIgnoreCase("patients")) 
+			{
+				lab1.value = "Patients";
+				app_content.setSrc("../patients/index_content.zul");
+			}
+			// calendar
+			else if (opt.equalsIgnoreCase("calendar")) 
+			{
+				lab1.value = "Calendar";
+				app_content.setSrc("../calendar/index_content.zul");
+			}
+			// carers:  /carers/index.zul
+			else if (opt.equalsIgnoreCase("carers")) 
+			{
+				lab1.value = "Social workers / caregivers";
+				app_content.setSrc("../carers/index_content.zul");
+			}
+			// clinicians: /clinicians/index.zul
+			else if (opt.equalsIgnoreCase("clinicians")) 
+			{
+				lab1.value = "Doctors";
+				app_content.setSrc("../clinicians/index_content.zul");
+			}
+			// qm: /qm/index.zul
+			else if (opt.equalsIgnoreCase("qm")) 
+			{
+				lab1.value = "-";
+				app_content.setSrc("../qm/index.zul");
+			}
+			// services: /extsrv/index_content.zul
+			else if (opt.equalsIgnoreCase("services")) 
+			{
+				lab1.value = "External services";
+				app_content.setSrc("../extsrv/index_content.zul");
+			}
+			// warnings: /warnings/index_content.zul
+			else if (opt.equalsIgnoreCase("warnings")) 
+			{
+				lab1.value = "Warnings";
+				app_content.setSrc("../warnings/index_content.zul");
+			}
+			// cm: /cms/index_content.zul
+			else if (opt.equalsIgnoreCase("cm")) 
+			{
+				lab1.value = "Content Management";
+				app_content.setSrc("../cms/index_content.zul");
+			}
+			// administration: /administration/index.zul
+			else if (opt.equalsIgnoreCase("administration")) 
+			{
+				lab1.value = "Administration";
+				app_content.setSrc("../administration/index_content.zul");
+			}
+			// home
+			else {
+				app_content.setSrc("../common/index_content.zul");
+			}
+		}
+	</zscript>
+
+</zk>

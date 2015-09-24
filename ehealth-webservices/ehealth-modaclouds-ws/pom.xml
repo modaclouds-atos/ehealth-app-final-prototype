@@ -1,0 +1,250 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>ehealth-ws</groupId>
+	<artifactId>ehealth-ws</artifactId>
+	<version>0.1</version>
+	<packaging>war</packaging>
+	<name>ehealth-modaclouds-ws</name>
+	<description>CXF-hibernate project using spring configuration</description>
+	
+	<repositories>
+	  	<repository>
+	   	 	<id>localRepo</id>
+	   	 	<name>localRepo</name>
+	    	<url>file://${project-directory}/ext_libs</url>	<!-- basedir -->
+	  	</repository>
+	  	<!-- MODACLOUDS DATA COLLECTOR -->
+	  	<repository>
+			<id>deib-polimi-releases</id>
+			<url>https://github.com/deib-polimi/deib-polimi-mvn-repo/raw/master/releases</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<!-- MODACLOUDS DATA COLLECTOR -->
+		<dependency>
+		    <groupId>it.polimi.tower4clouds</groupId>
+		    <artifactId>java-app-dc</artifactId>
+		    <version>0.2.2</version>
+		</dependency>
+		
+		<!-- CXF // WS-SECURITY -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
+			<version>${cxf-version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>jaxb-core</artifactId>
+					<groupId>com.sun.xml.bind</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http</artifactId>
+			<version>${cxf-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-ws-security</artifactId>
+			<version>${cxf-version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-bundle</artifactId>
+			<version>2.7.16</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>${bouncycastle-version}</version>
+		</dependency>
+		<!-- MYSQL -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql-version}</version>
+		</dependency>
+		<!-- HIBERNATE -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-c3p0</artifactId>
+			<version>${hibernate-version}</version>
+		</dependency>
+		<!-- database encryption -->
+		<dependency>
+			<groupId>org.jasypt</groupId>
+			<artifactId>jasypt</artifactId>
+			<version>${jasypt-version}</version>
+		</dependency>
+		<dependency>
+		  	<groupId>jasypt-hibernate</groupId>
+		  	<artifactId>jasypt-hibernate</artifactId>
+		  	<version>4.1.9.2</version>
+		</dependency>
+		<!-- SPRING -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>${spring-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+			<version>${spring-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring-version}</version>
+		</dependency>
+		<!-- OTHERS -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+			<version>${commons-configuration-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<version>2.11.0</version>
+		</dependency>
+		<!-- local libraries -->
+		<dependency>
+			<groupId>storage-component-sm</groupId>
+			<artifactId>storage-component-sm</artifactId>
+			<version>1.0</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>ehealth-modaclouds-ws</finalName>
+	
+		<pluginManagement>
+			<plugins>
+				<plugin>
+		            <groupId>org.codehaus.mojo</groupId>
+		            <artifactId>aspectj-maven-plugin</artifactId>
+		            <version>1.5</version>
+		            <executions>
+		                <execution>
+		                    <goals>
+		                        <goal>compile</goal>
+		                        <goal>test-compile</goal>
+		                    </goals>
+		                </execution>
+		            </executions>
+		            <configuration>
+		                <complianceLevel>1.7</complianceLevel>
+		                <source>1.7</source>
+		                <target>1.7</target>
+		                <aspectLibraries>
+		                    <aspectLibrary>
+		                        <groupId>it.polimi.modaclouds.monitoring</groupId>
+		                        <artifactId>app-level-dc</artifactId>
+		                    </aspectLibrary>
+		                </aspectLibraries>
+		            </configuration>
+		        </plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>${java-version}</source>
+						<target>${java-version}</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-eclipse-plugin</artifactId>
+					<configuration>
+						<projectNameTemplate>[artifactId]-[version]</projectNameTemplate>
+						<wtpmanifest>true</wtpmanifest>
+						<wtpapplicationxml>true</wtpapplicationxml>
+						<wtpversion>2.0</wtpversion>
+					</configuration>
+				</plugin>
+				<plugin>
+			        <artifactId>maven-war-plugin</artifactId>
+			        <version>2.4</version>
+			        <configuration>
+			          	<packagingExcludes>WEB-INF/lib/spring-asm-*.jar</packagingExcludes>
+			        </configuration>
+			 	</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<properties>
+		<project-directory>C:\Users\A572832\git\modaclouds_ehealth_webservices\ehealth-modaclouds-ws</project-directory>
+		<!-- JAVA -->
+		<java-version>1.7</java-version>
+		
+		<!-- ENCODING -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		
+		<!-- ARTIFACTS VERSION -->
+		<!-- CXF - 2.7.16 // 3.1.0 -->
+		<cxf-version>3.1.0</cxf-version> 
+		<!-- HIBERNATE 3.6.10.Final for JASYPT // 4.3.10.Final -->
+		<hibernate-version>4.3.10.Final</hibernate-version> 
+		<!-- WSS4J - 1.6.17 // 1.5.12 -->
+		<wss4j-version>1.6.17</wss4j-version>
+		<!-- MYSQL -->
+		<mysql-version>5.1.34</mysql-version>
+		<!-- SPRING // 2.5.6 // 2.5.6.SEC03 // 3.2.13.RELEASE // 4.1.4.RELEASE -->
+		<spring-version>4.1.4.RELEASE</spring-version>
+		<!-- JASYPT : MySQL encryption //  1.8 // 1.9.2 -->
+		<jasypt-version>1.8</jasypt-version>
+		<!-- OTHERS -->
+		<log4j-version>1.2.16</log4j-version>
+		<commons-configuration-version>1.6</commons-configuration-version>
+		<bouncycastle-version>1.51</bouncycastle-version>
+	</properties>
+
+</project>
