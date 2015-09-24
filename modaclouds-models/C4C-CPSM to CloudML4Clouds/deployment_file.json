@@ -1,0 +1,323 @@
+{
+"eClass" : "net.cloudml.core:CloudMLModel",
+"name" : "Generated_Deployment alternative 1-2",
+"properties" : [
+{
+"eClass":"net.cloudml.core:Property" ,
+"name":"sla_url",
+"value":"http://109.231.126.100:9040"
+},{
+"eClass":"net.cloudml.core:Property" ,
+"name":"agreement_id",
+"value":"2c5a19cc-3327-4c9c-afe4-ccb52d4c327c"
+}],
+"providers" : [{
+"eClass" : "net.cloudml.core:Provider",
+"name" : "private-cloudfoundry",
+"credentials"  : "C:/PROYECTOS/MODACLOUDS/TOOLS/deployment-cloudfoundry/credentials.txt"
+,"properties" : [ 
+{
+"eClass":"net.cloudml.core:Property" ,
+"name":"org",
+"value":"DevBox"
+},
+{
+"eClass":"net.cloudml.core:Property" ,
+"name":"space",
+"value":"SPACE1"
+},
+{
+"eClass":"net.cloudml.core:Property" ,
+"name":"endPoint",
+"value":"https://api.95.211.172.243.xip.io"
+}
+]
+},
+{
+"eClass" : "net.cloudml.core:Provider",
+"name" : "pivotal",
+"credentials"  : "C:/PROYECTOS/MODACLOUDS/TOOLS/deployment-cloudfoundry/credentials2.txt"
+,"properties" : [ 
+{
+"eClass":"net.cloudml.core:Property" ,
+"name":"org",
+"value":"rsucasas-org"
+},
+{
+"eClass":"net.cloudml.core:Property" ,
+"name":"space",
+"value":"development"
+},
+{
+"eClass":"net.cloudml.core:Property" ,
+"name":"endPoint",
+"value":"https://api.run.pivotal.io"
+}
+]
+}
+],
+"internalComponents" : [{
+"eClass" : "net.cloudml.core:InternalComponent",
+"name" : "eHealth-gui"
+,"properties" : [ 
+{
+"eClass":"net.cloudml.core:Property" ,
+"name":"warfile",
+"value":"C:/PROYECTOS/MODACLOUDS/TOOLS/deployment-cloudfoundry/ehealth-modaclouds-gui.war"
+},
+{
+"eClass":"net.cloudml.core:Property" ,
+"name":"buildpack",
+"value":"https://github.com/rsucasas/java-buildpack.git"
+}
+]
+,"resources" : [{
+"eClass" : "net.cloudml.core:Resource",
+"name" : "eHealth-guiResource",
+"requireCredentials" : false,
+"executeLocally" : false}]
+,"requiredPorts" : [{
+"eClass" : "net.cloudml.core:RequiredPort",
+"name" : "client",
+"portNumber" : "0",
+"isLocal" :false,
+"isMandatory" : false ,
+"component" : "internalComponents[eHealth-gui]"
+}
+]
+,"requiredExecutionPlatform" : {
+"eClass" : "net.cloudml.core:RequiredExecutionPlatform",
+"name" : "executionPlatformGUI",
+"owner" : "internalComponents[eHealth-gui]"
+,"demands" : [{
+"eClass" : "net.cloudml.core:Property",
+"name" : "Container",
+"value" : "warContainer"
+}
+]
+}
+},
+{
+"eClass" : "net.cloudml.core:InternalComponent",
+"name" : "eHealth-ws"
+,"properties" : [ 
+{
+"eClass":"net.cloudml.core:Property" ,
+"name":"warfile",
+"value":"C:/PROYECTOS/MODACLOUDS/TOOLS/deployment-cloudfoundry/ehealth-modaclouds-ws.war"
+},
+{
+"eClass":"net.cloudml.core:Property" ,
+"name":"buildpack",
+"value":"https://github.com/rsucasas/java-buildpack.git"
+}
+]
+,"resources" : [{
+"eClass" : "net.cloudml.core:Resource",
+"name" : "eHealth-wsResource",
+"requireCredentials" : false,
+"executeLocally" : false}]
+,"requiredPorts" : [{
+"eClass" : "net.cloudml.core:RequiredPort",
+"name" : "client",
+"portNumber" : "0",
+"isLocal" :false,
+"isMandatory" : false ,
+"component" : "internalComponents[eHealth-ws]"
+}
+]
+,"providedPorts" : [{
+"eClass" : "net.cloudml.core:ProvidedPort",
+"name" : "server",
+"isLocal" : false,
+"portNumber" : "0",
+"component" : "internalComponents[eHealth-ws]"
+}]
+,"requiredExecutionPlatform" : {
+"eClass" : "net.cloudml.core:RequiredExecutionPlatform",
+"name" : "executionPlatformWS",
+"owner" : "internalComponents[eHealth-ws]"
+,"demands" : [{
+"eClass" : "net.cloudml.core:Property",
+"name" : "Container",
+"value" : "warContainer"
+}
+]
+}
+}
+],
+"externalComponents" : [{
+"eClass" : "net.cloudml.core:ExternalComponent",
+"name" : "eHealth-db",
+"serviceType" : "Relational database",
+"provider" : ""
+,"providedPorts" : [{
+"eClass" : "net.cloudml.core:ProvidedPort",
+"name" : "server",
+"isLocal" : false,
+"portNumber" : "0",
+"component" : "externalComponents[eHealth-db]"
+}]
+},
+{
+"eClass" : "net.cloudml.core:ExternalComponent",
+"name" : "ExternalServiceTypeFrontend",
+"serviceType" : "Frontend",
+"provider" : "providers[private-cloudfoundry]"
+,"providedExecutionPlatforms" : [{
+"eClass" : "net.cloudml.core:ProvidedExecutionPlatform",
+"name" : "executionPlatfom",
+"owner" : "externalComponents[ExternalServiceTypeFrontend]"
+,"offers" : [{
+"eClass" : "net.cloudml.core:Property",
+"name" : "Container",
+"value" : "warContainer"
+}
+]
+}]
+},
+{
+"eClass" : "net.cloudml.core:ExternalComponent",
+"name" : "ExternalServiceTypeMiddleware",
+"serviceType" : "Middleware",
+"provider" : "providers[private-cloudfoundry]"
+,"providedExecutionPlatforms" : [{
+"eClass" : "net.cloudml.core:ProvidedExecutionPlatform",
+"name" : "executionPlatfom",
+"owner" : "externalComponents[ExternalServiceTypeMiddleware]"
+,"offers" : [{
+"eClass" : "net.cloudml.core:Property",
+"name" : "Container",
+"value" : "warContainer"
+}
+]
+}]
+}
+],
+"vms" : [],
+"relationships" : [{
+"eClass" : "net.cloudml.core:Relationship",
+"name" : "name_d19ecef4-2687-4c68-9fa9-f993d883de96"
+,"requiredPort" : "internalComponents[eHealth-gui]/requiredPorts[client]"
+,"providedPort" : "internalComponents[eHealth-ws]/providedPorts[server]"
+},
+{
+"eClass" : "net.cloudml.core:Relationship",
+"name" : "name_034b3deb-485c-49d0-ac5b-4156ca15a5be"
+,"requiredPort" : "internalComponents[eHealth-ws]/requiredPorts[client]"
+,"providedPort" : "externalComponents[eHealth-db]/providedPorts[server]"
+}
+],
+"internalComponentInstances" : [ { 
+"eClass" : "net.cloudml.core:InternalComponentInstance",
+"name" : "eHealth-ws-app",
+"type" : "internalComponents[eHealth-ws]"
+,"providedPortInstances" : [{
+"eClass" : "net.cloudml.core:ProvidedPortInstance",
+"name" : "server",
+"type" : "internalComponents[eHealth-ws]/providedPorts[server]"
+}
+] 
+,"requiredPortInstances" : [{
+"eClass" : "net.cloudml.core:RequiredPortInstance",
+"name" : "client",
+"type" : "internalComponents[eHealth-ws]/requiredPorts[client]"
+}
+] 
+,"requiredExecutionPlatformInstance" : {
+"eClass" : "net.cloudml.core:RequiredExecutionPlatformInstance",
+"name" : "executionPlatform",
+"owner" : "internalComponentInstances[eHealth-ws-app]",
+"type" : "internalComponents[eHealth-ws]/requiredExecutionPlatform[executionPlatformWS]"
+}
+}
+,
+  { 
+"eClass" : "net.cloudml.core:InternalComponentInstance",
+"name" : "eHealth-gui-app",
+"type" : "internalComponents[eHealth-gui]"
+,"requiredPortInstances" : [{
+"eClass" : "net.cloudml.core:RequiredPortInstance",
+"name" : "client",
+"type" : "internalComponents[eHealth-gui]/requiredPorts[client]"
+}
+] 
+,"requiredExecutionPlatformInstance" : {
+"eClass" : "net.cloudml.core:RequiredExecutionPlatformInstance",
+"name" : "executionPlatform",
+"owner" : "internalComponentInstances[eHealth-gui-app]",
+"type" : "internalComponents[eHealth-gui]/requiredExecutionPlatform[executionPlatformGUI]"
+}
+}
+],
+"externalComponentInstances" : [ { 
+"eClass" : "net.cloudml.core:ExternalComponentInstance",
+"name" : "ExternalServiceType",
+"type" : "externalComponents[ExternalServiceTypeMiddleware]"
+,"providedExecutionPlatformInstances" : [{
+"eClass" : "net.cloudml.core:ProvidedExecutionPlatformInstance",
+"name" : "executionPlatfom",
+"owner" : "externalComponentInstances[ExternalServiceType]",
+"type" : "externalComponents[ExternalServiceTypeMiddleware]/providedExecutionPlatforms[executionPlatfom]"
+}
+] 
+},
+  { 
+"eClass" : "net.cloudml.core:ExternalComponentInstance",
+"name" : "ExternalServiceType",
+"type" : "externalComponents[ExternalServiceTypeFrontend]"
+,"providedExecutionPlatformInstances" : [{
+"eClass" : "net.cloudml.core:ProvidedExecutionPlatformInstance",
+"name" : "executionPlatfom",
+"owner" : "externalComponentInstances[ExternalServiceType]",
+"type" : "externalComponents[ExternalServiceTypeFrontend]/providedExecutionPlatforms[executionPlatfom]"
+}
+] 
+},
+  { 
+"eClass" : "net.cloudml.core:ExternalComponentInstance",
+"name" : "eHealth-db",
+"type" : "externalComponents[eHealth-db]"
+,"providedPortInstances" : [{
+"eClass" : "net.cloudml.core:ProvidedPortInstance",
+"name" : "server",
+"type" : "externalComponents[eHealth-db]/providedPorts[server]"
+}
+] 
+,"requiredExecutionPlatformInstance" : {
+"eClass" : "net.cloudml.core:RequiredExecutionPlatformInstance",
+"name" : "executionPlatform",
+"owner" : "externalComponentInstances[eHealth-db]",
+"type" : "externalComponents[eHealth-db]/requiredExecutionPlatform[executionPlatform]"
+}
+] 
+}],
+"relationshipInstances" : [{
+"eClass" : "net.cloudml.core:RelationshipInstance",
+"name" : "name_f537aeb6-fd56-4fa6-b48e-a79c8790301d",
+"type" : "relationships[name_d19ecef4-2687-4c68-9fa9-f993d883de96]",
+"requiredPortInstance" : "internalComponentInstances[eHealth-gui-app]/requiredPortInstances[client]",
+"providedPortInstance" : "internalComponentInstances[eHealth-ws-app]/providedPortInstances[server]"
+},
+{
+"eClass" : "net.cloudml.core:RelationshipInstance",
+"name" : "name_1a310f9d-b484-4bc4-b7eb-ba6cc249bbbe",
+"type" : "relationships[name_034b3deb-485c-49d0-ac5b-4156ca15a5be]",
+"requiredPortInstance" : "internalComponentInstances[eHealth-ws-app]/requiredPortInstances[client]",
+"providedPortInstance" : "externalComponentInstances[eHealth-db]/providedPortInstances[server]"
+}
+],
+"executesInstances" : [{
+"eClass" : "net.cloudml.core:ExecuteInstance",
+"name" : "name_360a1296-1d1c-4a00-aeac-8ebdc8e3e173",
+"requiredExecutionPlatformInstance" : "internalComponentInstances[eHealth-ws-app]/requiredExecutionPlatformInstance[executionPlatform]",
+"providedExecutionPlatformInstance" : "externalComponentInstances[ExternalServiceType]/providedExecutionPlatformInstances[executionPlatfom]"
+},
+{
+"eClass" : "net.cloudml.core:ExecuteInstance",
+"name" : "name_ad907d4f-8715-4b44-a254-5271c509c16d",
+"requiredExecutionPlatformInstance" : "internalComponentInstances[eHealth-gui-app]/requiredExecutionPlatformInstance[executionPlatform]",
+"providedExecutionPlatformInstance" : "externalComponentInstances[ExternalServiceType]/providedExecutionPlatformInstances[executionPlatfom]"
+}
+]
+} 
