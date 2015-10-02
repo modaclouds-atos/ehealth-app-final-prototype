@@ -18,6 +18,9 @@
 1. Download content of 'ehealth-storage-component' folder
 2. Build with maven
 3. Use the .jar file in the 'ehealth-webservices' project (ehealth-webservices already comes with the jar)
+4. Requirements
+  1. java 7
+  2. maven
 
 ##### ehealth-webservices
 1. Download content of 'ehealth-webservices' folder
