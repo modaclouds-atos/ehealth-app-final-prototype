@@ -11,19 +11,16 @@
 
 #### How to install the ehealth components / applications?
 ##### ehealth-storage-component 
-(maven java web project)
 1. Download content of 'ehealth-storage-component' folder
 2. Build with maven
 3. Use the .jar file in the 'ehealth-webservices' project
 
 ##### ehealth-webservices
-(maven java web project)
 1. Download content of 'ehealth-webservices' folder
 2. Build with maven
 3. Deploy .war file in a Tomcat like server or in a PaaS
 
 ##### ehealth-webgui
-(maven java web project)
 1. Download content of 'ehealth-webgui' folder
 2. Build with maven
 3. Deploy .war file in a Tomcat like server or in a PaaS
