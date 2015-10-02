@@ -32,5 +32,6 @@
 4. Deploy .war file in a Tomcat like server or in a PaaS
 
 ##### ehealth-desktop-app
-.NET project
-Download and open with Visual Studio 2012
+1. Download and open with Visual Studio 2012
+2. Main application is 'Softcare.ClientApplication'
+3. Generate installer application or deploy directly from Visual Studio
