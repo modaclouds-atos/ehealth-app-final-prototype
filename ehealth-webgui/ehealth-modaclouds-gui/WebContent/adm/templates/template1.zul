@@ -84,10 +84,10 @@
 			<borderlayout>
 				<north title=" E-Health Application for people with dementia disease" height="55px" collapsible="true" border="0" id="northHeaderLayoutPanel" onOpen="collapsHeaderNorthBar();" sclass="headerwin2" >
 					<borderlayout>
-						<west size="85%" border="none" style="background-color: #ffffcc">
+						<west size="85%" border="none">
 							
 						</west>
-						<east size="15%" border="none" style="background-color: #ffffcc">
+						<east size="15%" border="none">
 							<vbox>
 								<hbox>
 									<label value="${hello} ${user}, " style="font-style: italic; font-weight: bold; font-size: 12px;"/>
@@ -175,7 +175,7 @@
 						
 						<south >
 							<window width="100%" border="none" id="migas" >
-								<hbox  width="100%" style="background-color: #ffffcc" >
+								<hbox  width="100%">
 									<label value="Home" id="migas1"
 										style="color: #00A3EF; font-style: italic; font-weight: bold; font-size: 12px; text-align: left;"/>
 									<label value="${sep1}" 
@@ -198,7 +198,8 @@
 		<!-- MAIN CONTENT -->
         <center border="none" id="centerHeaderLayout">
 			<borderlayout>
-				<center border="0" autoscroll="true" id="centerHeaderLayoutPanel" style="background-image: url('../images/page_img.jpg');">
+				<center border="0" autoscroll="true" id="centerHeaderLayoutPanel" style="background-image: url('../images/page_img.jpg'); background-repeat: no-repeat;
+						background-size:cover;">
 					<include id="app_content" src="../common/index_content.zul"/>
 				</center>
 			</borderlayout>

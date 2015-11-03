@@ -1,6 +1,6 @@
 <?page contentType="text/html;charset=UTF-8"?>
-<?link rel="shortcut icon" type="image/x-icon" href="/inc/favicon.ico"?>
-<?link rel="icon" type="image/x-icon" href="/inc/favicon.ico"?>
+<?link rel="shortcut icon" type="image/x-icon" href="../index2/img/favicon.ico"?>
+<?link rel="icon" type="image/x-icon" href="../index2/img/favicon.ico"?>
 <zk>
 	<zscript>
 		import org.zkoss.util.resource.Labels;
@@ -31,6 +31,8 @@
 			{
 				if (!SystemDictionary.CONFIG_PROPERTIES.isEmpty()) 
 				{ 
+					SystemDictionary.loadInitPage();
+				
 					// storage component
 					lgdburl = SystemDictionary.getWebServicesURL(); //.CONFIG_PROPERTIES.getString("storagecomponent.uri");
 					servicesUrl = lgdburl;
@@ -75,6 +77,8 @@
 	<style>
 		body {
 			background-image: url("images/page_img.jpg");
+			background-repeat: no-repeat;
+			background-size:cover;
 		}
 		
 		.login {
@@ -86,7 +90,7 @@
 		]]>
 	</style>
 	
-	<separator height="40px"/>
+	<separator height="150px"/>
 	
 	<window id="mainerror" sclass="mainerror" border="none" width="50%" closable="true" visible="false" onCreate="setErrorLabel();">
 		<label id="errorlbl"/>
